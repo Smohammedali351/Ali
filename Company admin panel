@@ -1,0 +1,35 @@
+import React, { useState } from 'react';
+
+
+interface Company {
+  id: number;
+  name: string;
+  location: string;
+  revenue: number;
+}
+
+const CompanyAdminPanel: React.FC = () => {
+  const [companies, setCompanies] = useState<Company[]>([]);
+  
+  const addCompany = (newCompany: Company) => {
+    setCompanies([...companies, newCompany]);
+  };
+
+  return (
+    <div>
+      <h1>Company Admin Panel</h1>
+      <button onClick={() => addCompany({ id: 1, name: 'Company A', location: 'New York', revenue: 1000000 })}>
+        Add Company
+      </button>
+      <ul>
+        {companies.map((company) => (
+          <li key={company.id}>
+            <h2>{company.name}</h2>
+            <p>Location: {company.location}</p>
+            <p>Revenue: ${company.revenue}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
